@@ -55,11 +55,14 @@ It will write out the queries themselves (as SQL files) and the results of those
 
 Example outputs are provided (both SQL files and their CSV outputs), generated from the sample input coding file.
 
-Note that the confidence intervals are calculated by two methods.
-* The "standard" central limit theorem approach of assuming a normal distribution, calculating the SD and SE of the data, and taking the 95% CI as +- 1.96 SE from the mean
-* By bootstrapping distributions from the data (per-survey) and estimating CIs with no assumptions about the distribution of the data
+##### 2.1 Confidence Interval calculation
 
-The second approach is more valid but cannot be done directly in FME; it is implemented via an RCaller transformer. This requires the R interpreter to be setup in FME workbench, and a couple of R libraries, listed in a workbench annotation, to be installed at the system level (run R Console as administrator and install them to the program files location). You can run the workbench without this requirement (and without calculating bootstrapped CIs) simply by disabling the RCaller transformer.
+Note that the confidence intervals calculation has changed from that done in the initial fever-seeking treatment work (where it was not part of the original extraction but happened downsteram). The code currently calculates three sets of confidence intervals for the **national-level treatment seeking proportion estimates**, calculated by different methods.
+* Using the **cluster-treatment-seeking-proportion data**, applying the "standard" central limit theorem approach of assuming a normal distribution, calculating the SD and SE of the data, and taking the 95% CI as +- 1.96 SE from the mean. The cluster-based SE was applied to the national-level mean.
+* Using the **cluster-treatment-seeking-proportion data**, normalising the values by the size (n with fever) of the cluster, then bootstrapping distributions from the data (per-survey) and estimating CIs with no assumptions about the distribution of the data. This fixed the problem of non-normality in the cluster proportion data, but is still not the correct approach as the CIs are estimated on a different population (cluster data) to the national-level result (from child-level data).
+* Using the **binary child-level sought-treatment data**, modelled using a GLM and a quasibinomial distribution. This is the most appropriate approach and produces the CIs that should be used.
+
+The second two approaches cannot be done directly in FME; they are implemented via RCaller transformers. This requires the R interpreter to be setup in FME workbench, and a couple of R libraries, listed in a workbench annotation, to be installed at the system level (run R Console as administrator and install them to the program files location). You can run the workbench without this requirement (and without calculating CIs) simply by disabling the RCaller transformers.
 
 #### 3. Post-process: attach World Bank indicators and reformat national-level outputs
 The main output used for World Malaria Report and other analysis is the national-level data. The treatment-seeking proportions are modelled (as response variables) against a number of national-level demographic and economic indicators (such as GDP, provision of healthcare, etc). These indicators are provided by the World Bank in their freely-available World Development Indicators dataset.
