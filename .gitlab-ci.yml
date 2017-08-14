@@ -1,0 +1,14 @@
+stages:
+  - copy
+copy_to_map_data:
+  only: 
+    - tags
+    - schedules
+  stage: copy
+  tags: [ 'fs1-build-shell' ]
+  script:
+    - ls -lah $TARGET_DIR
+    - rm -rf $TARGET_DIR/Code || true
+    - cp -R . $TARGET_DIR/Code
+    - cd $TARGET_DIR/Code && git checkout -B "$CI_BUILD_REF_NAME" "$CI_BUILD_REF"
+    - chmod -R 777 $TARGET_DIR
