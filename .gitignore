@@ -1,3 +1,5 @@
+*.log
+*.recover
 Checkpoint_Outputs/*
 !Checkpoint_Outputs/README.md
 !Checkpoint_Outputs/Archive/
