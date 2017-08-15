@@ -3,12 +3,15 @@ stages:
 copy_to_map_data:
   only: 
     - tags
+    - gbd_format
     - schedules
   stage: copy
   tags: [ 'fs1-build-shell' ]
   script:
     - ls -lah $TARGET_DIR
+    # the repo includes the output folders and the code folders
+    # we don't want to remove the contents of the output folder archive
     - rm -rf $TARGET_DIR/Code || true
-    - cp -R . $TARGET_DIR/Code
-    - cd $TARGET_DIR/Code && git checkout -B "$CI_BUILD_REF_NAME" "$CI_BUILD_REF"
-    - chmod -R 777 $TARGET_DIR
+    - cp -R . $TARGET_DIR
+    - cd $TARGET_DIR && git checkout -B "$CI_BUILD_REF_NAME" "$CI_BUILD_REF"
+    - chmod -R 777 $TARGET_DIR/Code
