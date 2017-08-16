@@ -17,4 +17,7 @@ copy_to_map_data:
     # write the short hash of the checked-out commit to a text file 
     # that the code when it runs can use to identify its outputs
     - git rev-parse --short=7 HEAD>$TARGET_DIR/Code/githash.txt
+    # make the files read-only
     - chmod -R 755 $TARGET_DIR/Code
+    # but the folder itself can be written (necessary for FME to run)
+    - chmod 777 $TARGET_DIR/Code
