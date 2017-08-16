@@ -7,3 +7,4 @@ Checkpoint_Outputs/Archive/*
 !Checkpoint_Outputs/Archive/README.md
 Intermediary_Outputs/*
 !Intermediary_Outputs/README.md
+Code/githash.txt

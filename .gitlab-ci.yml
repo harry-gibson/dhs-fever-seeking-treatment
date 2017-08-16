@@ -14,4 +14,7 @@ copy_to_map_data:
     - rm -rf $TARGET_DIR/Code || true
     - cp -R . $TARGET_DIR
     - cd $TARGET_DIR && git checkout -B "$CI_BUILD_REF_NAME" "$CI_BUILD_REF"
-    - chmod -R 777 $TARGET_DIR/Code
+    # write the short hash of the checked-out commit to a text file 
+    # that the code when it runs can use to identify its outputs
+    - git rev-parse --short=7 HEAD>$TARGET_DIR/Code/githash.txt
+    - chmod -R 755 $TARGET_DIR/Code
