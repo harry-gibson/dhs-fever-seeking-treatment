@@ -6,6 +6,14 @@ The original version of the code operated against CSV files which were manipulat
 
 A single FME workbench reads in the configuration file (below) and uses this to generate SQL queries which are then executed against the database to retrieve the results at different levels of aggregation. Barring any dramatic changes to the DHS survey schemas the code can be easily re-run to extract data for new surveys (after they have been loaded to our database); similarly it can be re-run should the required output value mappings change.
 
+### This repository
+
+This repository contains recent versions of the extraction code and workbenches. It does not contain:
+* the oldest versions of the code, which are on the MAP Z drive under \\map-fs1.ndph.ox.ac.uk\map_data\DHS_Automation\Processing\Fever_Seeking_Treatment
+* the output data, which are on the shared google drive at Shared drives\Data Gathering\Standard_MAP_DHS_Outputs\Fever_Seeking_Treatment\ as well as (possibly) in GBD folders
+
+The gbd_format branch of this repository is configured with a CI pipeline to clone the repo into the GBD processing folders structure. As of 2019-07-15 this hasn't been changed from GBD2017 and the pipeline will therefore fail, if we decide we want to continue with this approach for GBD 2019 then the pipeline can be updated easily enough. I would prefer to see the data being stored in the google shared drive as they are now used widely outside of GBD.
+
 ### Background
 
 Information about where treatment is sought for a fever is stored in DHS surveys in a combination of many different columns, generally columns H32A - H32Z of table REC43.
