@@ -1,3 +1,8 @@
+# THIS REPOSITORY IS NOW ARCHIVED
+## The contents are incorporated into [another repository](https://github.com/harry-gibson/DHS-Data-Extractions/tree/main/Fever_Seeking_Treatment) which should be used instead
+---------------------------------
+
+
 ### Intro
 
 This is a re-written version of the code to extract Fever-Treatment-Seeking data from DHS surveys within the [Malaria Atlas Project](http://www.map.ox.ac.uk) (MAP).
